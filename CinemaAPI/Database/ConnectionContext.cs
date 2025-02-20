@@ -13,5 +13,6 @@ public class ConnectionContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<UsersModel>().HasIndex(u => u.IdUser).IsUnique().HasDatabaseName("pk_users");
         modelBuilder.Entity<UsersModel>().Property(u => u.Role).HasConversion<int>();
+        modelBuilder.Entity<UsersModel>().HasIndex(u => u.Username).IsUnique().HasDatabaseName("username");
     }
 }

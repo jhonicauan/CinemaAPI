@@ -19,7 +19,7 @@ public class UsersModel
     [Column("Username")]
     public string Username { get; private set; }
     
-    [MaxLength(50)]
+    [MaxLength(80)]
     [Column("Password")]
     public string Password { get; private set; }
     

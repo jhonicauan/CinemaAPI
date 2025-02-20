@@ -1,4 +1,5 @@
 using CinemaAPI.DTO;
+using CinemaAPI.Model;
 using CinemaAPI.Repository;
 
 namespace CinemaAPI.Database;
@@ -12,9 +13,9 @@ public class UsersRepository : IRepositoryUsers
         _context = context;
     }
 
-    public void AddUsers(AddUsersDto users)
+    public void AddUser(UsersModel user)
     {
-        _context.Add(users);
+        _context.Add(user);
         _context.SaveChanges();
     }
 
