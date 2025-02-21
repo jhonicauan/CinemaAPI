@@ -6,19 +6,19 @@ public class SeatsModel
 {
     public int IdSeat { get; private set;}
     public int IdRoom { get; private set;}
-    public RoomsModel Room { get; private set; } = new();
+    public RoomsModel Room { get; private set; }
     public string RowLetter { get; set;}
     public int SeatNumber { get; set;}
-    public TypeSeats TypeSeat { get; private set;}
+    public TypeSeats TypeSeat { get; set;}
     
-    public List<TicketModel> Tickets { get; set; } = new();
+    public List<TicketModel> Tickets { get; set; } 
 
-    public SeatsModel(int idRoom,string rowLetter,int seatNumber, TypeSeats typeSeat)
+    public SeatsModel(int idRoom,string rowLetter,int seatNumber)
     {
         IdRoom = idRoom;
         RowLetter = rowLetter;
         SeatNumber = seatNumber;
-        TypeSeat = typeSeat;
+        TypeSeat = TypeSeats.Normal;
     }
     
     public SeatsModel(){}

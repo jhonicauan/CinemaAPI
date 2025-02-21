@@ -6,11 +6,11 @@ public class TicketModel
 {
     public int IdTicket { get; private set;}
     public int IdSeat { get; private set;}
-    public SeatsModel Seat { get; private set; } = new();
+    public SeatsModel Seat { get; private set; } 
     public int IdUser { get; private set;}
-    public UsersModel Users { get; private set;} = new();
+    public UsersModel Users { get; private set;} 
     public int IdMovieSession { get; private set;}
-    public MovieSessionModel MovieSession { get; private set;} = new();
+    public MovieSessionModel MovieSession { get; private set;} 
 
     private float price { get; set; }
     public TypeTicket TypeTicket { get; private set;}

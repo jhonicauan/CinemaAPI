@@ -4,9 +4,9 @@ public class MovieSessionModel
 {
     public int IdMovieSession { get; private set; }
     public int IdMovie { get; private set; }
-    public MoviesModel Movie { get; private set; } = new();
+    public MoviesModel Movie { get; private set; } 
     public int IdRoom { get; private set; }
-    public RoomsModel Room { get; private set; } = new();
+    public RoomsModel Room { get; private set; } 
     public DateTime SessionDate { get;  set; }
     
     public List<TicketModel> Tickets { get; set; } = new();
