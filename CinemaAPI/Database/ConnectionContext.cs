@@ -8,11 +8,14 @@ public class ConnectionContext : DbContext
     public ConnectionContext(DbContextOptions<ConnectionContext> options) : base(options) {}
     
     public DbSet<UsersModel> Users { get; set;}
+    public DbSet<MoviesModel> Movies { get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<UsersModel>().HasIndex(u => u.IdUser).IsUnique().HasDatabaseName("pk_users");
-        modelBuilder.Entity<UsersModel>().Property(u => u.Role).HasConversion<int>();
+        modelBuilder.Entity<UsersModel>().HasKey(u => u.IdUser);
+        modelBuilder.Entity<MoviesModel>().HasKey(u => u.IdMovie);
+        modelBuilder.Entity<UsersModel>().HasIndex(u => u.IdUser).IsUnique().HasDatabaseName("pk_user");
         modelBuilder.Entity<UsersModel>().HasIndex(u => u.Username).IsUnique().HasDatabaseName("username");
+        modelBuilder.Entity<UsersModel>().Property(u => u.Role).HasConversion<int>();
     }
 }

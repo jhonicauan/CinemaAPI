@@ -2,6 +2,7 @@
 using CinemaAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CinemaAPI.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    partial class ConnectionContextModelSnapshot : ModelSnapshot
+    [Migration("20250221034031_MovieAdd")]
+    partial class MovieAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,14 +92,6 @@ namespace CinemaAPI.Migrations
                         .HasColumnName("Username");
 
                     b.HasKey("IdUser");
-
-                    b.HasIndex("IdUser")
-                        .IsUnique()
-                        .HasDatabaseName("pk_user");
-
-                    b.HasIndex("Username")
-                        .IsUnique()
-                        .HasDatabaseName("username");
 
                     b.ToTable("Users");
                 });
