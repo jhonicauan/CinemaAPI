@@ -13,7 +13,7 @@ public class MovieSessionModel
 
     public MovieSessionModel(int idMovie, int idRoom, DateTime sessionDate)
     {
-        IdMovieSession = idMovie;
+        IdMovie = idMovie;
         IdRoom = idRoom;
         SessionDate = sessionDate;
     }

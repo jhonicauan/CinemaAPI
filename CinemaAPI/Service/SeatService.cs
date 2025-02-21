@@ -1,6 +1,7 @@
 using CinemaAPI.Controller;
 using CinemaAPI.Database;
 using CinemaAPI.DTO;
+using CinemaAPI.Enums;
 using CinemaAPI.Model;
 using CinemaAPI.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,11 @@ public class SeatService
     
     public void UpdateType(int seatId, UpdateTypeSeatDto updateType)
     {
-        _repository.UpdateType(seatId, updateType);
+        SeatsModel seat = _context.Seats.Find(seatId) ?? throw new InvalidOperationException();
+
+        seat.TypeSeat = (TypeSeats)updateType.NewType;
+        
+        _repository.UpdateType(seat);
     }
 
     private int CountSeats(AddSeatDto seats)

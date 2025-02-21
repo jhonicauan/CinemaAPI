@@ -10,6 +10,6 @@ public interface IRepositorySeat
 
     public List<SeatDto> GetSeatsOfRoom(int roomId);
 
-    public void UpdateType(int seatId, UpdateTypeSeatDto updateType);
+    public void UpdateType(SeatsModel seat);
 }
 

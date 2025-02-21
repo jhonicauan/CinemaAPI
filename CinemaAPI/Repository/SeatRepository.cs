@@ -26,11 +26,8 @@ public class SeatRepository : IRepositorySeat
         return _context.Seats.Select(s => new SeatDto(s.RowLetter,s.SeatNumber)).ToList();
     }
 
-    public void UpdateType(int seatId, UpdateTypeSeatDto updateType)
+    public void UpdateType(SeatsModel seat)
     {
-        SeatsModel seat = _context.Seats.Find(seatId) ?? throw new InvalidOperationException();
-
-        seat.TypeSeat = (TypeSeats)updateType.NewType;
         _context.Update(seat);
         _context.SaveChanges();
     }
