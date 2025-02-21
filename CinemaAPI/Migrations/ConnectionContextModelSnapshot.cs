@@ -69,7 +69,7 @@ namespace CinemaAPI.Migrations
                     b.Property<int>("IdRoom")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("SeassonDate")
+                    b.Property<DateTime>("SessionDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("IdMovieSession");

@@ -7,15 +7,15 @@ public class MovieSessionModel
     public MoviesModel Movie { get; private set; } = new();
     public int IdRoom { get; private set; }
     public RoomsModel Room { get; private set; } = new();
-    public DateTime SeassonDate { get;  set; }
+    public DateTime SessionDate { get;  set; }
     
     public List<TicketModel> Tickets { get; set; } = new();
 
-    public MovieSessionModel(int idMovie, int idRoom, DateTime seassonDate)
+    public MovieSessionModel(int idMovie, int idRoom, DateTime sessionDate)
     {
         IdMovieSession = idMovie;
         IdRoom = idRoom;
-        SeassonDate = seassonDate;
+        SessionDate = sessionDate;
     }
     
     public MovieSessionModel(){}
