@@ -8,11 +8,11 @@ namespace CinemaAPI.Controller;
 [Route("api/users")]
 public class UserController
 {
-    private readonly UserService _userService;
+    private readonly UserService _service;
 
-    public UserController(UserService userService)
+    public UserController(UserService service)
     {
-        _userService = userService;
+        _service = service;
     }
 
     [HttpGet]
@@ -21,7 +21,7 @@ public class UserController
     {
         try
         {
-            return new OkObjectResult(_userService.GetUsers());
+            return new OkObjectResult(_service.GetUsers());
         }
         catch (Exception ex)
         {
@@ -35,7 +35,7 @@ public class UserController
     {
         try
         {
-            _userService.AddUser(userDto);
+            _service.AddUser(userDto);
             return new OkObjectResult("Usuario adicionado com sucesso");
         }
         catch (Exception ex)
@@ -50,7 +50,7 @@ public class UserController
     {
         try
         {
-            if (_userService.LoginIsCorrect(loginDto))
+            if (_service.LoginIsCorrect(loginDto))
             {
                 return new OkObjectResult("Login efetuado com sucesso");
             }
