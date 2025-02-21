@@ -14,8 +14,7 @@ public class RoomController
         _service = service;
     }
     
-    [HttpPost]
-    [Route("addRoom")]
+    [HttpPost("addRoom")]
     public IActionResult AddRoom()
     {
         try
@@ -29,8 +28,7 @@ public class RoomController
         }
     }
     
-    [HttpGet]
-    [Route("getRooms")]
+    [HttpGet("getRooms")]
     public IActionResult GetAllRooms()
     {
         try

@@ -15,8 +15,7 @@ public class MovieController
         _service = service;
     }
     
-    [HttpGet]
-    [Route("viewAllMovies")]
+    [HttpGet("viewAllMovies")]
     public IActionResult GetMovies()
     {
         try
@@ -29,8 +28,7 @@ public class MovieController
         }
     }
     
-    [HttpGet]
-    [Route("viewActiveMovies")]
+    [HttpGet("viewActiveMovies")]
     public IActionResult GetActiveMovies()
     {
         try
@@ -43,8 +41,7 @@ public class MovieController
         }
     }
 
-    [HttpPost]
-    [Route("addMovie")]
+    [HttpPost("addMovie")]
     public IActionResult AddMovie([FromBody] MovieDto movie)
     {
         try

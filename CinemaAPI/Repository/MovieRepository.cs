@@ -22,6 +22,7 @@ public class MovieRepository : IRepositoryMovie
     public List<MovieDto> GetAllMovies()
     {
         return _context.Movies.Select(m => new MovieDto(m.Name, m.Description,m.ImageUrl)).ToList();
+        _context.Movies.Where(m => m.Name == "jhoni").OrderByDescending(m => m.IdMovie).FirstOrDefault();
     }
 
     public List<MovieDto> GetActiveMovies()

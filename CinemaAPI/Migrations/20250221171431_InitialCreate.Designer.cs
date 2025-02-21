@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CinemaAPI.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    [Migration("20250221034300_MovieAdd2")]
-    partial class MovieAdd2
+    [Migration("20250221171431_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,39 @@ namespace CinemaAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("CinemaAPI.Model.CategoryModel", b =>
+                {
+                    b.Property<int>("IdCategory")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCategory"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.HasKey("IdCategory");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.MovieCategoryModel", b =>
+                {
+                    b.Property<int>("IdMovie")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdCategory")
+                        .HasColumnType("integer");
+
+                    b.HasKey("IdMovie", "IdCategory");
+
+                    b.HasIndex("IdCategory");
+
+                    b.ToTable("MovieCategories");
+                });
 
             modelBuilder.Entity("CinemaAPI.Model.MoviesModel", b =>
                 {
@@ -58,6 +91,23 @@ namespace CinemaAPI.Migrations
                     b.HasKey("IdMovie");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.RoomsModel", b =>
+                {
+                    b.Property<int>("IdRoom")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRoom"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdRoom");
+
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("CinemaAPI.Model.UsersModel", b =>
@@ -102,6 +152,35 @@ namespace CinemaAPI.Migrations
                         .HasDatabaseName("username");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.MovieCategoryModel", b =>
+                {
+                    b.HasOne("CinemaAPI.Model.CategoryModel", "Category")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("IdCategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaAPI.Model.MoviesModel", "Movies")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.CategoryModel", b =>
+                {
+                    b.Navigation("MovieCategories");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.MoviesModel", b =>
+                {
+                    b.Navigation("MovieCategories");
                 });
 #pragma warning restore 612, 618
         }

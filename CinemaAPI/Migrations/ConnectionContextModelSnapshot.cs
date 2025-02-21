@@ -21,6 +21,39 @@ namespace CinemaAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CinemaAPI.Model.CategoryModel", b =>
+                {
+                    b.Property<int>("IdCategory")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCategory"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.HasKey("IdCategory");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.MovieCategoryModel", b =>
+                {
+                    b.Property<int>("IdMovie")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdCategory")
+                        .HasColumnType("integer");
+
+                    b.HasKey("IdMovie", "IdCategory");
+
+                    b.HasIndex("IdCategory");
+
+                    b.ToTable("MovieCategories");
+                });
+
             modelBuilder.Entity("CinemaAPI.Model.MoviesModel", b =>
                 {
                     b.Property<int>("IdMovie")
@@ -116,6 +149,35 @@ namespace CinemaAPI.Migrations
                         .HasDatabaseName("username");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.MovieCategoryModel", b =>
+                {
+                    b.HasOne("CinemaAPI.Model.CategoryModel", "Category")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("IdCategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CinemaAPI.Model.MoviesModel", "Movies")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.CategoryModel", b =>
+                {
+                    b.Navigation("MovieCategories");
+                });
+
+            modelBuilder.Entity("CinemaAPI.Model.MoviesModel", b =>
+                {
+                    b.Navigation("MovieCategories");
                 });
 #pragma warning restore 612, 618
         }

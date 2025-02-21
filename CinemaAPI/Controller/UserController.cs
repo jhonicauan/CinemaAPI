@@ -15,8 +15,7 @@ public class UserController
         _service = service;
     }
 
-    [HttpGet]
-    [Route("viewUsers")]
+    [HttpGet("viewUsers")]
     public IActionResult GetUsers()
     {
         try
@@ -29,8 +28,7 @@ public class UserController
         }
     }
 
-    [HttpPost]
-    [Route("addUser")]
+    [HttpPost("addUser")]
     public IActionResult AddUser([FromBody] AddUsersDto userDto)
     {
         try
@@ -44,8 +42,7 @@ public class UserController
         }
     }
 
-    [HttpPost]
-    [Route("login")]
+    [HttpPost("login")]
     public IActionResult Login([FromBody] LoginDto loginDto)
     {
         try
