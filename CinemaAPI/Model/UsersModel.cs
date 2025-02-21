@@ -26,6 +26,8 @@ public class UsersModel
     [Column("Role")]
     public UserRoles Role {get;}
     
+    public List<TicketModel> Tickets { get; set; } = new();
+    
     public UsersModel() {}
 
     public UsersModel(string name, string username, string password, UserRoles role)

@@ -11,6 +11,9 @@ public class RoomsModel
     
     public string Name { get; set; }
 
+    public List<SeatsModel> Seats { get; set; } = new();
+    public List<MovieSessionModel> MovieSessions { get; set; } = new();
+
     public RoomsModel()
     {
         Name = "Sala ";

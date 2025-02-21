@@ -26,7 +26,7 @@ public class MoviesModel
     public bool Active { get; set;}
     
     public List<MovieCategoryModel> MovieCategories { get; set; } = new();
-    
+    public List<MovieSessionModel> MovieSessions { get; set; } = new();
     public MoviesModel(){}
 
     public MoviesModel(int id, string name, string description, string imageUrl)
