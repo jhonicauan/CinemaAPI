@@ -1,6 +1,7 @@
 using CinemaAPI.DTO;
 using CinemaAPI.Model;
 using CinemaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controller;
@@ -18,6 +19,7 @@ public class TicketController
     }
 
     [HttpPost("addTicket")]
+    [Authorize]
     public IActionResult AddTicket(AddTicketDto ticketDto)
     {
         try
@@ -32,6 +34,7 @@ public class TicketController
     }
 
     [HttpGet("viewTickets/{id}")]
+    [Authorize]
     public IActionResult ViewMyTickets(int id)
     {
         try
@@ -45,6 +48,7 @@ public class TicketController
     }
     
     [HttpGet("viewActiveTickets/{id}")]
+    [Authorize]
     public IActionResult ViewMyActiveTickets(int id)
     {
         try

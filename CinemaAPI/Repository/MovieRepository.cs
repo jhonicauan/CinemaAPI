@@ -19,14 +19,47 @@ public class MovieRepository : IRepositoryMovie
         _context.SaveChanges();
     }
 
+    public void ChangeStatusMovie(int movieId)
+    {
+        MoviesModel movie = _context.Movies.Find(movieId) ?? throw new InvalidOperationException();
+        if (movie.Active)
+        {
+            movie.Active = false;
+        }
+        else
+        {
+            movie.Active = true;
+        }
+        _context.Update(movie);
+        _context.SaveChanges();
+    }
+
     public List<MovieDto> GetAllMovies()
     {
-        return _context.Movies.Select(m => new MovieDto(m.Name, m.Description,m.ImageUrl)).ToList();
-        _context.Movies.Where(m => m.Name == "jhoni").OrderByDescending(m => m.IdMovie).FirstOrDefault();
+        return _context.Movies
+            .Select(m => new MovieDto(
+                m.Name,
+                m.Description,
+                m.ImageUrl)).ToList();
     }
 
     public List<MovieDto> GetActiveMovies()
     {
-        return _context.Movies.Where(m => m.Active).Select(m => new MovieDto(m.Name, m.Description,m.ImageUrl)).ToList();
+        return _context.Movies
+            .Where(m => m.Active)
+            .Select(m => new MovieDto(
+                m.Name,
+                m.Description,
+                m.ImageUrl)).ToList();
+    }
+
+    public List<MovieDto> FindMovies(string search)
+    {
+        return _context.Movies
+            .Where(m => m.Active && m.Name.Contains(search))
+            .Select(m => new MovieDto(
+                m.Name,
+                m.Description,
+                m.ImageUrl)).ToList();
     }
 }

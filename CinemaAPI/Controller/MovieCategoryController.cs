@@ -1,6 +1,7 @@
 using CinemaAPI.DTO;
 using CinemaAPI.Model;
 using CinemaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controller;
@@ -17,7 +18,9 @@ public class MovieCategoryController
         _service = service;
     }
     
+    
     [HttpGet("getMoviesByCategory/{idCategory}")]
+    [Authorize]
     public IActionResult GetMoviesByCategory(int idCategory)
     {
         try
@@ -31,6 +34,7 @@ public class MovieCategoryController
     }
 
     [HttpPost("addMovieCategory")]
+    [Authorize(Roles = "worker")]
     public IActionResult AddMovieCategory([FromBody] AddMovieCategoryDto movieCategoryDto)
     {
         try

@@ -70,8 +70,14 @@ public class UserService
         return password.Length >= 8;
     }
 
+    public UserRoles GetRole(string username)
+    {
+        return _context.Users.Where(u => u.Username == username).Select(u => u.Role).First();
+    }
+
     private bool UserExists(string username)
     {
         return _context.Users.Any(u => u.Username == username);
     }
+    
 }

@@ -23,6 +23,11 @@ public class MovieService
         _repository.AddMovie(movie);
     }
 
+    public void ChangeStatusMovie(int movieId)
+    {
+        _repository.ChangeStatusMovie(movieId);
+    }
+
     public List<MovieDto> GetMovies()
     {
         return _repository.GetAllMovies();
@@ -31,5 +36,10 @@ public class MovieService
     public List<MovieDto> GetActiveMovies()
     {
         return _repository.GetActiveMovies();
+    }
+
+    public List<MovieDto> FindMovies(string search)
+    {
+        return _repository.FindMovies(search);
     }
 }

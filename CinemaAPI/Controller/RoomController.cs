@@ -1,4 +1,5 @@
 using CinemaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controller;
@@ -15,6 +16,7 @@ public class RoomController
     }
     
     [HttpPost("addRoom")]
+    [Authorize(Roles = "worker")]
     public IActionResult AddRoom()
     {
         try
@@ -29,6 +31,7 @@ public class RoomController
     }
     
     [HttpGet("getRooms")]
+    [Authorize]
     public IActionResult GetAllRooms()
     {
         try

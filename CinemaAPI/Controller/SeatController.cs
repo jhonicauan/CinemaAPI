@@ -1,6 +1,7 @@
 using CinemaAPI.DTO;
 using CinemaAPI.Model;
 using CinemaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controller;
@@ -18,6 +19,7 @@ public class SeatController
     }
 
     [HttpGet("viewSeats/{idRoom}")]
+    [Authorize]
     public  IActionResult GetSeatsOfRoom(int idRoom)
     {
         try
@@ -31,6 +33,7 @@ public class SeatController
     }
 
     [HttpPost("addSeat")]
+    [Authorize(Roles = "worker")]
     public IActionResult AddSeat(AddSeatDto seat)
     {
         try
@@ -45,6 +48,7 @@ public class SeatController
     }
 
     [HttpPut("updateSeat/{idSeat}")]
+    [Authorize(Roles = "worker")]
     public IActionResult UpdateTypeSeat(int idSeat, [FromBody]  UpdateTypeSeatDto updateType)
     {
         try

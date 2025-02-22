@@ -2,6 +2,7 @@ using CinemaAPI.DTO;
 using CinemaAPI.Model;
 using CinemaAPI.Repository;
 using CinemaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controller;
@@ -19,6 +20,7 @@ public class MovieSessionController
     }
 
     [HttpPost("addMovieSession")]
+    [Authorize(Roles = "worker")]
     public IActionResult AddMovieSession(AddSessionDto movieSessionDto)
     {
         try
@@ -33,6 +35,7 @@ public class MovieSessionController
     }
 
     [HttpGet("viewMovieSessions")]
+    [Authorize]
     public IActionResult GetActiveMovieSessions()
     {
         try
@@ -46,6 +49,7 @@ public class MovieSessionController
     }
 
     [HttpGet("viewAllMovieSessions")]
+    [Authorize(Roles = "worker")]
     public IActionResult GetAllMovieSessions()
     {
         try

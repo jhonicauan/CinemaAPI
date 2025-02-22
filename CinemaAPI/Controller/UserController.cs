@@ -1,5 +1,6 @@
 using CinemaAPI.DTO;
 using CinemaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controller;
@@ -16,6 +17,7 @@ public class UserController
     }
 
     [HttpGet("viewUsers")]
+    [Authorize(Roles = "worker")]
     public IActionResult GetUsers()
     {
         try
@@ -27,7 +29,8 @@ public class UserController
             return new BadRequestObjectResult(ex.Message);
         }
     }
-
+    
+    [Authorize]
     [HttpPost("addUser")]
     public IActionResult AddUser([FromBody] AddUsersDto userDto)
     {
@@ -41,22 +44,5 @@ public class UserController
             return new BadRequestObjectResult(ex.Message);
         }
     }
-
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginDto loginDto)
-    {
-        try
-        {
-            if (_service.LoginIsCorrect(loginDto))
-            {
-                return new OkObjectResult("Login efetuado com sucesso");
-            }
-            
-            return new BadRequestObjectResult("Login invalido");
-        }
-        catch (Exception ex)
-        {
-            return new BadRequestObjectResult(ex.Message);
-        }
-    }
+    
 }
